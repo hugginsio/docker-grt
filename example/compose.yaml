@@ -1,0 +1,33 @@
+# Compose file for GRT
+
+services:
+  grt:
+    image: "ghcr.io/hugginsio/grt:v0.0.3@sha256:1f23fb505ccf8698e2732e426f65f234068f61d7bb9376ff33c390d57ba542d1"
+    restart: "unless-stopped"
+    logging: &logging
+      driver: "local"
+      options:
+        max-file: "3"
+        max-size: "5m"
+    ports:
+      - "3000:3000"
+    environment:
+      - "TZ=America/Chicago"
+    volumes:
+      - "grt-data:/data"
+  grt-files:
+    image: "docker.io/filebrowser/filebrowser:v2.52.0@sha256:363c1eae79e7c08bbb994c3511875cbcb65e70df9ac850221d60400c362f4ff9"
+    restart: "unless-stopped"
+    logging: *logging
+    ports:
+      - "3001:80"
+    environment:
+      - "FB_DATABASE=/config/filebrowser.db"
+      - "FB_LOG=stdout"
+      - "FB_NOAUTH=true"
+      - "FB_ROOT=/data"
+      - "TZ=America/Chicago"
+    volumes:
+      - "grt-data:/data"
+volumes:
+  grt-data: {}
