@@ -1,0 +1,5 @@
+.git
+*.md
+LICENSE
+Taskfile.yaml
+dagger/
