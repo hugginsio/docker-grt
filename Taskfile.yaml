@@ -4,10 +4,6 @@
 version: 3
 
 tasks:
-  default:
-    cmds:
-      - task -l
-      - dagger functions
   dev:
     desc: spin up container
-    cmd: "dagger call grt up --no-init --insecure-root-capabilities --ports 3000:3000"
+    cmd: "dagger call build-image up --ports 3000:3000 --no-init"

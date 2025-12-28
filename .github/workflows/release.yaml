@@ -15,7 +15,7 @@ jobs:
       - uses: dagger/dagger-for-github@e47aba410ef9bb9ed81a4d2a97df31061e5e842e # 8.0.0
         with:
           verb: call
-          args: "release-server --tag=$TAG --registry=ghcr.io --image-name=grt --username=$REGISTRY_USERNAME --password=env://REGISTRY_PASSWORD"
+          args: "release-image --tag=$TAG --registry=ghcr.io --image-name=grt --username=$REGISTRY_USERNAME --password=env://REGISTRY_PASSWORD"
         env:
           REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
           REGISTRY_USERNAME: ${{ github.repository_owner }}
