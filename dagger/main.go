@@ -16,7 +16,8 @@ func (m *Grt) RetrieveSource() *dagger.Directory {
 	return dag.Container().
 		From("alpine:latest").
 		WithMountedFile("/tmp/grt.tar.gz", archive).
-		WithExec([]string{"tar", "-xzf", "/tmp/grt.tar.gz", "-C", "/out"}).
+		WithExec([]string{"mkdir", "-p", "/out"}).
+		WithExec([]string{"tar", "-xzf", "/tmp/grt.tar.gz", "-C", "/out", "--strip-components=1"}).
 		Directory("/out")
 }
 
